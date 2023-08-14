@@ -1,5 +1,6 @@
 package nabil.hibernateadvancedmapping;
 
+import nabil.hibernateadvancedmapping.entities.Course;
 import nabil.hibernateadvancedmapping.entities.Instructor;
 import nabil.hibernateadvancedmapping.entities.InstructorDetails;
 import nabil.hibernateadvancedmapping.repositories.InstructorRepository;
@@ -18,6 +19,7 @@ public class HibernateAdvancedMappingApplication {
     @Bean
     CommandLineRunner commandLineRunner(InstructorRepository instructorRepository) {
         return args -> {
+            System.out.println("Commandline Runner");
             Instructor ins1 = Instructor
                     .builder()
                     .firstName("Ahmed")
@@ -30,6 +32,10 @@ public class HibernateAdvancedMappingApplication {
                     .about("I am a software engineer")
                     .build();
             ins1.setInstructorDetails(insDetails1);
+            Course c1 = Course.builder().title("c1").build();
+            Course c2 = Course.builder().title("c2").build();
+            ins1.addCourse(c1);
+            ins1.addCourse(c2);
             instructorRepository.save(ins1);
         };
     }
